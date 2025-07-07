@@ -38,3 +38,8 @@ en:
       notice: 'Address was successfully updated.'
     destroy:
       notice: 'Address was successfully destroyed.'
+  users:
+    update:
+      notice: 'User was successfully updated.'
+    destroy:
+      notice: 'User was successfully destroyed.'
