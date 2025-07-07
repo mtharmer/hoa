@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :addresses
-  devise_for :users, path: ''
+  devise_for :users, path: '', controllers: {
+    registrations: 'registrations',
+  }
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

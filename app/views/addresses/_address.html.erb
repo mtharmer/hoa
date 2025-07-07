@@ -1,0 +1,11 @@
+<div id="<%= dom_id address %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-bold mb-1">Address:</strong>
+    <%= address.address %>
+
+    <h2 class='font-bold'>Residents:</h2>
+    <%- address.users.each do |user| %>
+      <p><%= "#{user.name} - #{user.email}" %></p>
+    <% end %>
+  </div>
+</div>

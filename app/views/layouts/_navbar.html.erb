@@ -1,8 +1,15 @@
 <nav class="sticky top-0 z-50 border border-slate-400 bg-white">
   <div class="mx-auto h-16 flex justify-between items-center pl-4">
     <ul class="flex space-x-4">
+      <%- if current_user %>
+        <li>
+          <span class="text-slate-800 font-bold"><%= current_user&.address&.address %></span>
+        </li>
+      <% end %>
       <li>
-        <a href="/" class="text-slate-800 hover:text-slate-600">Home</a>
+        <a href="/" class="text-slate-800 hover:text-slate-600">
+          <%= ENV['HOA_TITLE'] || 'HOA' %> Home
+        </a>
       </li>
       <%- if current_user&.admin? %>
         <li>
