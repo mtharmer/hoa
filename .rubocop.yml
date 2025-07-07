@@ -13,6 +13,8 @@ AllCops:
     - config/**/*
     - config.ru
     - db/**/*
+    - vendor/bundle/**/*
+    - .vendor/bundle/**/*
 
 Style/Documentation:
   Enabled: false
