@@ -26,9 +26,12 @@ jobs:
         with:
           ruby-version: '3.3.6'
           bundler-cache: true
-      - run: bundle install
+      - name: Install Dependencies
+        env:
+          RAILS_ENV: test
+        run: bundle install
       - name: RuboCop
-        run: bundle exec rubocop --format github
+        run: rubocop --format github
       - name: Run Tests
         env:
           RAILS_ENV: test
