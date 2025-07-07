@@ -5,6 +5,9 @@
         <a href="/" class="text-slate-800 hover:text-slate-600">Home</a>
       </li>
       <%- if current_user&.admin? %>
+        <li>
+          <a href="/addresses" class="text-slate-800 hover:text-slate-600">Addresses</a>
+        </li>
       <% end %>
     </ul>
     <ul class="flex space-x-4 pr-4">
