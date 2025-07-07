@@ -4,6 +4,7 @@ plugins:
   - rubocop-rake
   - rubocop-rspec
   - rubocop-rspec_rails
+  - rubocop-erb
 
 AllCops:
   NewCops: enable
