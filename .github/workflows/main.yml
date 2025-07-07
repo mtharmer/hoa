@@ -1,0 +1,43 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.6'
+          bundler-cache: true
+      - name: Install Dependencies
+        env:
+          RAILS_ENV: test
+        run: bundle install
+      - name: RuboCop
+        run: bundle exec rubocop --format github
+      - name: Run Tests
+        env:
+          RAILS_ENV: test
+          HOA_DATABASE_TEST_URL: postgres://postgres:postgres@localhost:5432/hoa_test
+        run: |
+          sudo apt-get -y install libpq-dev
+          bundle exec rails db:setup
+          bundle exec rake assets:precompile
+          bundle exec rspec

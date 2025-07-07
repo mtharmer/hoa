@@ -10,6 +10,16 @@
           <%= render 'devise/shared/error_messages', resource: resource %>
 
           <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, class: 'border rounded-sm bg-slate-100' %>
+          </div>
+
+          <div class='field'>
+            <%= f.label :address_id, 'Address' %><br />
+            <%= f.collection_select :address_id, Address.all, :id, :address, { prompt: 'Select an address' }, class: 'border rounded-sm bg-slate-100' %>
+          </div>
+
+          <div class="field">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'border rounded-sm bg-slate-100' %>
           </div>

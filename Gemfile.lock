@@ -112,6 +112,11 @@ GEM
     drb (2.2.3)
     erb (5.0.1)
     erubi (1.13.1)
+    factory_bot (6.5.4)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.0)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
@@ -151,6 +156,7 @@ GEM
       date
       net-protocol
     net-pop (0.1.2)
+      net-protocol
     net-protocol (0.2.2)
       timeout
     net-smtp (0.5.1)
@@ -361,6 +367,7 @@ DEPENDENCIES
   bootsnap
   debug
   devise (~> 4.9)
+  factory_bot_rails (~> 6.5)
   faker (~> 3.5)
   importmap-rails
   jbuilder
@@ -384,7 +391,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.3p89
+   ruby 3.3.6p108
 
 BUNDLED WITH
    2.5.23
