@@ -35,6 +35,7 @@ jobs:
       - name: Run Tests
         env:
           RAILS_ENV: test
+          HOA_POSTGRES_HOST: postgres
           HOA_DATABASE_PASSWORD: postgres
         run: |
           sudo apt-get -y install libpq-dev

@@ -55,6 +55,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: <%= ENV["HOA_POSTGRES_HOST"] || "localhost" %>
   database: hoa_test
   password: <%= ENV["HOA_DATABASE_PASSWORD"] %>
 
