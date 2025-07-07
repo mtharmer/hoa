@@ -29,3 +29,12 @@
 
 en:
   hello: "Hello world"
+  application:
+    alert: 'You must be an admin to perform this action.'
+  addresses:
+    create:
+      notice: 'Address was successfully created.'
+    update:
+      notice: 'Address was successfully updated.'
+    destroy:
+      notice: 'Address was successfully destroyed.'

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def verify_admin!
     return if current_user&.admin?
 
-    flash[:alert] = 'You must be an admin to perform this action.'
+    flash[:alert] = I18n.t('application.alert')
     redirect_to root_path
   end
 end

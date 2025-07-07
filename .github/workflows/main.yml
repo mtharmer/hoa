@@ -6,8 +6,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
@@ -16,3 +28,12 @@ jobs:
       - run: bundle install
       - name: RuboCop
         run: rubocop
+      - name: Run Tests
+        env:
+          RAILS_ENV: test
+          HOA_DATABASE_PASSWORD: postgres
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+          bundle exec rails db:seed
+          bundle exec rspec
