@@ -39,4 +39,5 @@ jobs:
         run: |
           sudo apt-get -y install libpq-dev
           bundle exec rails db:setup
+          bundle exec rake assets:precompile
           bundle exec rspec
