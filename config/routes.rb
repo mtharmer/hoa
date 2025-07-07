@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   get 'users/destroy'
   resources :addresses
   resources :users, except: [:create, :new]
-  devise_for :users, path: '', controllers: {
+  devise_for :users, path: 'auth', controllers: {
     registrations: 'registrations',
+    sessions: 'sessions'
   }
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

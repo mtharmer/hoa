@@ -13,8 +13,12 @@
 
   <body>
     <%= render partial: 'layouts/navbar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%- if notice %>
+      <p class="bg-green-200 text-green-700 h-12 p-2"><%= notice %></p>
+    <% end %>
+    <%- if alert %>
+      <p class="bg-red-300 text-red-600 h-12 p-2"><%= alert %></p>
+    <% end %>
     <main class="mx-auto mt-16 px-5">
       <%= yield %>
     </main>
