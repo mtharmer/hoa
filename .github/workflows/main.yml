@@ -35,7 +35,7 @@ jobs:
       - name: Run Tests
         env:
           RAILS_ENV: test
-          HOA_DATABASE_TEST_URL: postgres://hoa:postgres@localhost/hoa_test
+          HOA_DATABASE_TEST_URL: postgres://postgres:postgres@localhost:5432/hoa_test
         run: |
           sudo apt-get -y install libpq-dev
           bundle exec rails db:setup
