@@ -28,7 +28,7 @@ jobs:
           bundler-cache: true
       - run: bundle install
       - name: RuboCop
-        run: rubocop
+        run: bundle exec rubocop .
       - name: Run Tests
         env:
           RAILS_ENV: test
