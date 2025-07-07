@@ -13,6 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe '/addresses', type: :request do
+  let(:user) { create(:user, admin: true) }
   # This should return the minimal set of attributes required to create a valid
   # Address. As you add validations to Address, be sure to
   # adjust the attributes here as well.
@@ -28,11 +29,21 @@ RSpec.describe '/addresses', type: :request do
     }
   end
 
+  before do
+    sign_in user
+  end
+
   describe 'GET /index' do
     it 'renders a successful response' do
       Address.create! valid_attributes
       get addresses_url
       expect(response).to be_successful
+    end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      get addresses_url
+      expect(response).not_to be_successful
     end
   end
 
@@ -42,12 +53,25 @@ RSpec.describe '/addresses', type: :request do
       get address_url(address)
       expect(response).to be_successful
     end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      address = Address.create! valid_attributes
+      get address_url(address)
+      expect(response).not_to be_successful
+    end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_address_url
       expect(response).to be_successful
+    end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      get new_address_url
+      expect(response).not_to be_successful
     end
   end
 
@@ -56,6 +80,13 @@ RSpec.describe '/addresses', type: :request do
       address = Address.create! valid_attributes
       get edit_address_url(address)
       expect(response).to be_successful
+    end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      address = Address.create! valid_attributes
+      get edit_address_url(address)
+      expect(response).not_to be_successful
     end
   end
 
@@ -84,6 +115,12 @@ RSpec.describe '/addresses', type: :request do
         post addresses_url, params: { address: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
+    end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      post addresses_url, params: { address: valid_attributes }
+      expect(response).not_to be_successful
     end
   end
 
@@ -117,6 +154,13 @@ RSpec.describe '/addresses', type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      address = Address.create! valid_attributes
+      patch address_url(address), params: { address: valid_attributes }
+      expect(response).not_to be_successful
+    end
   end
 
   describe 'DELETE /destroy' do
@@ -131,6 +175,13 @@ RSpec.describe '/addresses', type: :request do
       address = Address.create! valid_attributes
       delete address_url(address)
       expect(response).to redirect_to(addresses_url)
+    end
+
+    it 'rejects non-admin users' do
+      user.update(admin: false)
+      address = Address.create! valid_attributes
+      delete address_url(address)
+      expect(response).not_to be_successful
     end
   end
 end
