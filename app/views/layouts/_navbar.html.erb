@@ -4,14 +4,25 @@
       <li>
         <a href="/" class="text-slate-800 hover:text-slate-600">Home</a>
       </li>
-      <li>
-        <a href="/sign_in" class="text-slate-800 hover:text-slate-600">Login</a>
-      </li>
+      <%- if current_user&.admin? %>
+      <% end %>
     </ul>
     <ul class="flex space-x-4 pr-4">
-      <li>
-        <a href="/sign_up" class="text-slate-800 hover:text-slate-600">Sign Up</a>
-      </li>
+      <%- if !current_user %>
+        <li>
+          <a href="/sign_in" class="text-slate-800 hover:text-slate-600">Login</a>
+        </li>
+        <li>
+          <a href="/sign_up" class="text-slate-800 hover:text-slate-600">Sign Up</a>
+        </li>
+      <% else %>
+        <li>
+          <a href="/edit" class="text-slate-800 hover:text-slate-600">Edit Profile</a>
+        </li>
+        <li>
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button cursor-pointer' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
