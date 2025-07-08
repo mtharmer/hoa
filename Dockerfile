@@ -59,4 +59,9 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
+RUN bundle exec rails db:environment:set RAILS_ENV=production && \
+    bundle exec rails db:migrate && \
+    bundle exec rails db:seed && \
+    bundle exec rails assets:clean && \
+    bundle exec rails assets:precompile
 CMD ["./bin/dev"]
