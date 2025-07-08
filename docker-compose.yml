@@ -1,5 +1,5 @@
 services:
-  finance-api:
+  hoa:
     image: 273058101644.dkr.ecr.us-east-1.amazonaws.com/hoa-prod:latest
     build:
       context: .
