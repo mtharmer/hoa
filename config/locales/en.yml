@@ -55,3 +55,10 @@ en:
       notice: 'Comment was successfully created.'
     destroy:
       notice: 'Comment was successfully destroyed.'
+  documents:
+    download:
+      alert: 'Document not found or file not attached.'
+    create:
+      notice: 'Document was successfully created.'
+    destroy:
+      notice: 'Document was successfully destroyed.'

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :documents, only: [:index, :create, :destroy]
+  get 'documents/download/:id', to: 'documents#download', as: 'download_document'
   resources :comments, only: [:create, :destroy]
   resources :posts, except: [:show, :edit, :update]
   resources :addresses
