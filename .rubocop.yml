@@ -27,3 +27,6 @@ RSpec/ExampleLength:
 
 RSpecRails/InferredSpecType:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 20
