@@ -10,6 +10,7 @@ services:
     environment:
       - RAILS_ENV
       - HOA_DATABASE_URL
+      - RAILS_SECRET_KEY
     ports:
       - 3000:3000
     network_mode: host
