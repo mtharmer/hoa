@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :address, optional: true
+  has_many :posts, dependent: :destroy
 
   def admin?
     admin
