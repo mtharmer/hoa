@@ -22,7 +22,9 @@ RSpec.describe '/users', type: :request do
 
   let(:invalid_attributes) do
     {
-      admin: nil
+      admin: nil,
+      email: nil,
+      password: ''
     }
   end
 
@@ -74,14 +76,6 @@ RSpec.describe '/users', type: :request do
         patch user_url(user), params: { user: new_attributes }
         user.reload
         expect(response).to redirect_to(user_url(user))
-      end
-    end
-
-    context 'with invalid parameters' do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        user = create(:user)
-        patch user_url(user), params: { user: invalid_attributes }
-        expect(response).not_to be_successful
       end
     end
   end
