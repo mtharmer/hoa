@@ -80,3 +80,6 @@ group :test do
 end
 
 gem 'devise', '~> 4.9'
+
+gem "aws-actionmailer-ses", "~> 1.0"
+gem "aws-sdk-rails", "~> 5.1"
