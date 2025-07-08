@@ -19,4 +19,4 @@ jobs:
           RAILS_ENV: test
         run: bundle install
       - name: Brakeman
-        run: bundle exec brakeman --format github
+        run: bundle exec brakeman --format github -q
