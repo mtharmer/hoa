@@ -50,3 +50,8 @@ en:
       notice: 'Post was successfully updated.'
     destroy:
       notice: 'Post was successfully destroyed.'
+  comments:
+    create:
+      notice: 'Comment was successfully created.'
+    destroy:
+      notice: 'Comment was successfully destroyed.'

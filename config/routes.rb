@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments, only: [:create, :destroy]
   resources :posts, except: [:show, :edit, :update]
   resources :addresses
   resources :users, except: [:create, :new]
