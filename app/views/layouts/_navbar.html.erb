@@ -11,6 +11,11 @@
           <%= ENV['HOA_TITLE'] || 'HOA' %> Home
         </a>
       </li>
+      <%- if current_user %>
+        <li>
+          <a href="/posts" class="text-slate-800 hover:text-slate-600">Dashboard</a>
+        </li>
+      <% end %>
       <%- if current_user&.admin? %>
         <li>
           <a href="/addresses" class="text-slate-800 hover:text-slate-600">Addresses</a>

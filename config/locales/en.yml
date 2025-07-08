@@ -43,3 +43,10 @@ en:
       notice: 'User was successfully updated.'
     destroy:
       notice: 'User was successfully destroyed.'
+  posts:
+    create:
+      notice: 'Post was successfully created.'
+    update:
+      notice: 'Post was successfully updated.'
+    destroy:
+      notice: 'Post was successfully destroyed.'

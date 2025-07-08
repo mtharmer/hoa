@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
-  resources :users
-  get 'users/index'
-  get 'users/show'
-  get 'users/edit'
-  get 'users/update'
-  get 'users/destroy'
+  resources :posts, except: [:show, :edit, :update]
   resources :addresses
   resources :users, except: [:create, :new]
   devise_for :users, path: 'auth', controllers: {
