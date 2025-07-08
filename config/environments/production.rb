@@ -94,4 +94,14 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+ 
+  config.x.mail_from = ENV['HOA_MAIL_FROM']
+  config.action_mailer.delivery_method = :ses
+  config.action_mailer.ses_settings = {
+    access_key_id:     ENV['AWS_ACCESS_KEY_ID'],
+    secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+    region:            'us-east-1'
+  }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: ENV['HOA_FQDN'], port: 3000 }
 end

@@ -14,6 +14,10 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development"
 
 ENV RAILS_MASTER_KEY=
+ENV HOA_MAIL_FROM=
+ENV HOA_FQDN=
+ENV AWS_ACCESS_KEY_ID=
+ENV AWS_SECRET_ACCESS_KEY=
 
 # Throw-away build stage to reduce size of final image
 FROM base as build

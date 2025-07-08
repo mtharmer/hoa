@@ -11,6 +11,10 @@ services:
       - RAILS_ENV
       - HOA_DATABASE_URL
       - RAILS_MASTER_KEY
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - HOA_FQDN
+      - HOA_MAIL_FROM
     ports:
       - 3000:3000
     network_mode: host
