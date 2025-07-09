@@ -15,6 +15,9 @@ services:
       - AWS_SECRET_ACCESS_KEY
       - HOA_FQDN
       - HOA_MAIL_FROM
+      - AWS_S3_ACCESS_KEY
+      - AWS_S3_SECRET_KEY
+      - AWS_S3_BUCKET
     ports:
       - 3000:3000
     network_mode: host

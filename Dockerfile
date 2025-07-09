@@ -18,6 +18,9 @@ ENV HOA_MAIL_FROM=
 ENV HOA_FQDN=
 ENV AWS_ACCESS_KEY_ID=
 ENV AWS_SECRET_ACCESS_KEY=
+ENV AWS_S3_ACCESS_KEY=
+ENV AWS_S3_SECRET_KEY=
+ENV AWS_S3_BUCKET=
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
