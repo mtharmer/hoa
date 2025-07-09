@@ -30,8 +30,6 @@ jobs:
         env:
           RAILS_ENV: test
         run: bundle install
-      - name: RuboCop
-        run: bundle exec rubocop --format github
       - name: Run Tests
         env:
           RAILS_ENV: test

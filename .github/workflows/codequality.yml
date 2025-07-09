@@ -1,4 +1,4 @@
-name: Brakeman Security Scan
+name: Code Quality Checks
 
 permissions:
   contents: read
@@ -23,3 +23,7 @@ jobs:
         run: bundle install
       - name: Brakeman
         run: bundle exec brakeman --format github -q
+      - name: Reek
+        run: bundle exec reek --format github
+      - name: RuboCop
+        run: bundle exec rubocop --format github

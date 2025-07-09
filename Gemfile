@@ -88,3 +88,5 @@ gem 'aws-sdk-rails', '~> 5.1'
 gem 'aws-sdk-s3', '~> 1.192'
 
 gem 'image_processing', '~> 1.14'
+
+gem "reek", "~> 6.5"

@@ -6,9 +6,10 @@ class SessionsController < Devise::SessionsController
   private
 
   def check_unlocked
-    return unless params[:user] && params[:user][:email]
+    email = params.dig(:user, :email)
+    return if email.blank?
 
-    user = User.find_by(email: params[:user][:email])
+    user = User.find_by(email:)
     if user&.locked
       flash[:alert] = I18n.t('devise.sessions.locked')
       redirect_to new_user_session_path

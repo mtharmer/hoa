@@ -1,0 +1,12 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  DuplicateMethodCall:
+    enabled: true
+    max_calls: 2
+  TooManyStatements:
+    enabled: true
+    max_statements: 10
+
+exclude_paths:
+  - 'db/'
