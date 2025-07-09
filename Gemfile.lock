@@ -391,7 +391,6 @@ GEM
     ruby-vips (2.2.4)
       ffi (~> 1.12)
       logger
-    secure_headers (7.1.0)
     securerandom (0.4.1)
     shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
@@ -484,7 +483,6 @@ DEPENDENCIES
   rubocop-rake (~> 0.7.1)
   rubocop-rspec (~> 3.6)
   rubocop-rspec_rails (~> 2.31)
-  secure_headers (~> 7.1)
   shoulda-matchers (~> 6.5)
   simplecov (~> 0.22.0)
   sprockets-rails

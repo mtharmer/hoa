@@ -38,5 +38,8 @@ module Hoa
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use SHA256 for signed cookies
+    config.action_dispatch.signed_cookie_digest = "SHA256"
   end
 end
