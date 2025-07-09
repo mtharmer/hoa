@@ -52,8 +52,10 @@ gem 'bootsnap', require: false
 group :development, :test do
   gem 'brakeman', '~> 7.0'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'bundle-audit', '~> 0.1.0'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails', '~> 6.5'
+  gem 'reek', '~> 6.5'
   gem 'rspec-rails', '~> 7.1'
   gem 'rubocop-erb', '~> 0.6.0'
   gem 'rubocop-factory_bot', '~> 2.27'
@@ -88,5 +90,3 @@ gem 'aws-sdk-rails', '~> 5.1'
 gem 'aws-sdk-s3', '~> 1.192'
 
 gem 'image_processing', '~> 1.14'
-
-gem "reek", "~> 6.5"

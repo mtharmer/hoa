@@ -27,3 +27,5 @@ jobs:
         run: bundle exec reek --format github
       - name: RuboCop
         run: bundle exec rubocop --format github
+      - name: Bundle Audit
+        run: bundle exec bundle-audit check --no-update

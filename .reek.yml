@@ -7,6 +7,8 @@ detectors:
   TooManyStatements:
     enabled: true
     max_statements: 10
+  InstanceVariableAssumption:
+    enabled: false
 
 exclude_paths:
   - 'db/'

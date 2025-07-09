@@ -1,25 +1,26 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :set_comment, only: %i[destroy]
+  before_action :create_comment, only: %i[create]
   before_action :authenticate_user!
 
   # POST /comments or /comments.json
   def create
-    new_comment = create_comment
     respond_to do |format|
-      if new_comment.save
+      if @comment.save
         format.html { redirect_to posts_path, notice: I18n.t('comments.create.notice') }
-        format.json { render :show, status: :created, location: new_comment }
+        format.json { render :show, status: :created, location: @comment }
       else
-        format.html { redirect_to posts_path, alert: new_comment.errors.full_messages.to_sentence }
-        format.json { render json: new_comment.errors, status: :unprocessable_entity }
+        format.html { redirect_to posts_path, alert: @comment.errors.full_messages.to_sentence }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    comment.destroy!
+    @comment.destroy!
 
     respond_to do |format|
       format.html { redirect_to comments_path, status: :see_other, notice: I18n.t('comments.destroy.notice') }
@@ -29,9 +30,9 @@ class CommentsController < ApplicationController
 
   private
 
-  # Memoize the comment lookup to avoid multiple database queries.
-  def comment
-    @comment ||= Comment.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
@@ -40,8 +41,7 @@ class CommentsController < ApplicationController
   end
 
   def create_comment
-    new_comment = Comment.new(comment_params)
-    new_comment.user = current_user
-    new_comment
+    @comment = Comment.new(comment_params)
+    @comment.user = current_user
   end
 end
