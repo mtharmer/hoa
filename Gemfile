@@ -90,3 +90,7 @@ gem 'aws-sdk-rails', '~> 5.1'
 gem 'aws-sdk-s3', '~> 1.192'
 
 gem 'image_processing', '~> 1.14'
+
+gem 'rack-attack', '~> 6.7'
+
+gem "secure_headers", "~> 7.1"

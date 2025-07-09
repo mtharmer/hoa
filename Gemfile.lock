@@ -277,6 +277,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.16)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -389,6 +391,7 @@ GEM
     ruby-vips (2.2.4)
       ffi (~> 1.12)
       logger
+    secure_headers (7.1.0)
     securerandom (0.4.1)
     shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
@@ -471,6 +474,7 @@ DEPENDENCIES
   jbuilder
   pg (~> 1.1)
   puma (>= 5.0)
+  rack-attack (~> 6.7)
   rails (~> 7.1.5, >= 7.1.5.1)
   reek (~> 6.5)
   rspec-rails (~> 7.1)
@@ -480,6 +484,7 @@ DEPENDENCIES
   rubocop-rake (~> 0.7.1)
   rubocop-rspec (~> 3.6)
   rubocop-rspec_rails (~> 2.31)
+  secure_headers (~> 7.1)
   shoulda-matchers (~> 6.5)
   simplecov (~> 0.22.0)
   sprockets-rails
