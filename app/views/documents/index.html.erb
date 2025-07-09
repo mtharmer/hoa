@@ -5,10 +5,13 @@
     <h1 class="font-bold text-4xl">Documents</h1>
     <%- if current_user.admin? %>
       <button id="upload-document-button" data-controller='document' data-action='click->document#add' class="rounded-md px-2 py-1 bg-blue-600 hover:bg-blue-500 text-white font-medium cursor-pointer">
-        <i class="fa-solid fa-plus mr-2"></i> Upload Document
+        Upload Document
       </button>
       <div id='upload-document-form' class="hidden">
         <%= render 'form', document: Document.new %>
+        <button id="cancel-upload-button" data-controller='document' data-action='click->document#cancel' class="mt-2 rounded-md px-2 py-1 bg-gray-300 hover:bg-gray-200 text-black font-medium cursor-pointer">
+          Cancel Upload
+        </button>
       </div>
     <% end %>
   </div>
@@ -20,7 +23,7 @@
           <%= render document %>
           <%- if current_user.admin? %>
             <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-              <%= button_to 'Delete', document, method: :delete, class: 'w-full sm:w-auto rounded-md px-2 py-1 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer', data: { turbo_confirm: 'Are you sure?' } %>
+              <%= button_to 'Delete', document, method: :delete, class: 'w-full sm:w-auto rounded-md px-2 py-1 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer', form: { data: { turbo_confirm: 'Are you sure?' } } %>
             </div>
           <% end %>
         </div>

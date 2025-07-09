@@ -14,7 +14,7 @@
           <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
             <%= link_to 'Show', address, class: 'w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium' %>
             <%= link_to 'Edit', edit_address_path(address), class: 'w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium' %>
-            <%= button_to 'Delete', address, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white font-medium #{address.users.empty? ? 'bg-red-600 hover:bg-red-500 cursor-pointer' : 'bg-gray-400'}", data: { turbo_confirm: 'Are you sure?' }, disabled: (!address.users.empty?).to_s %>
+            <%= button_to 'Delete', address, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white font-medium #{address.users.empty? ? 'bg-red-600 hover:bg-red-500 cursor-pointer' : 'bg-gray-400'}", data: { turbo_confirm: 'Are you sure?' }, disabled: !address.users.empty? %>
           </div>
         </div>
       <% end %>
