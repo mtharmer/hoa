@@ -29,3 +29,5 @@ jobs:
         run: bundle exec rubocop --format github
       - name: Bundle Audit
         run: bundle exec bundle-audit check --no-update
+      - name: RubyCritic
+        run: ./rubycritic.sh

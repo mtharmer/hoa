@@ -88,3 +88,5 @@ gem 'aws-sdk-s3', '~> 1.192'
 gem 'devise', '~> 4.9'
 gem 'image_processing', '~> 1.14'
 gem 'rack-attack', '~> 6.7'
+
+gem "rubycritic", "~> 4.9"
