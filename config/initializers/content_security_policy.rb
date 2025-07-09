@@ -32,7 +32,7 @@ Rails.application.configure do |policy|
     policy.object_src :none
     policy.script_src :self, :https
     policy.style_src :self, :https, :unsafe_inline
-    policy.report_uri "/csp-violation-report"
+    # policy.report_uri "/csp-violation-report"
   end
   config.content_security_policy_report_only = true
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
