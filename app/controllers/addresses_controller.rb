@@ -24,39 +24,17 @@ class AddressesController < ApplicationController
   # POST /addresses or /addresses.json
   def create
     @address = Address.new(address_params)
-
-    respond_to do |format|
-      if @address.save
-        format.html { redirect_to @address, notice: I18n.t('addresses.create.notice') }
-        format.json { render :show, status: :created, location: @address }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
-    end
+    super(@address) # Calls the create method from ApplicationController
   end
 
   # PATCH/PUT /addresses/1 or /addresses/1.json
   def update
-    respond_to do |format|
-      if @address.update(address_params)
-        format.html { redirect_to @address, notice: I18n.t('addresses.update.notice') }
-        format.json { render :show, status: :ok, location: @address }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @address.errors, status: :unprocessable_entity }
-      end
-    end
+    super(@address, address_params) # Calls the update method from ApplicationController
   end
 
   # DELETE /addresses/1 or /addresses/1.json
   def destroy
-    @address.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to addresses_path, status: :see_other, notice: I18n.t('addresses.destroy.notice') }
-      format.json { head :no_content }
-    end
+    super(@address, addresses_path) # Calls the destroy method from ApplicationController
   end
 
   private

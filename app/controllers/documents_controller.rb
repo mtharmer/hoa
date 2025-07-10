@@ -22,7 +22,7 @@ class DocumentsController < ApplicationController
 
   # POST /documents or /documents.json
   def create
-    @document = create_and_sanitize_document
+    @document = Document.new(document_params).sanitize
 
     respond_to do |format|
       if @document.save
@@ -37,14 +37,8 @@ class DocumentsController < ApplicationController
 
   # DELETE /documents/1 or /documents/1.json
   def destroy
-    attachment = @document.file
-    attachment.purge if attachment.attached?
-    @document.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to documents_path, status: :see_other, notice: I18n.t('documents.destroy.notice') }
-      format.json { head :no_content }
-    end
+    @document.purge_file
+    super(@document, documents_path) # Calls the destroy method from ApplicationController
   end
 
   private
@@ -57,25 +51,5 @@ class DocumentsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def document_params
     params.require(:document).permit(:file)
-  end
-
-  def create_and_sanitize_document
-    document = Document.new(document_params)
-    return document unless document.file.attached?
-
-    # Sanitize the filename to prevent directory traversal attacks
-    document.file.filename = sanitize_filename(document.file.filename.to_s)
-
-    document
-  end
-
-  def sanitize_filename(filename)
-    filename.strip.tap do |name|
-      # NOTE: File.basename doesn't work right with Windows paths on Unix
-      # get only the filename, not the whole path
-      name.sub!(%r{\A.*(\\|/)}, '')
-      # Finally, replace all non alphanumeric, underscore or periods with underscore
-      name.gsub!(/[^\w.-]/, '_')
-    end
   end
 end

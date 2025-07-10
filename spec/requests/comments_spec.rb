@@ -79,7 +79,7 @@ RSpec.describe '/comments', type: :request do
     it 'redirects to the comments list' do
       comment = Comment.create! valid_attributes
       delete comment_url(comment)
-      expect(response).to redirect_to(comments_url)
+      expect(response).to redirect_to(posts_url)
     end
   end
 end

@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
         format.html { redirect_to posts_path, notice: I18n.t('comments.create.notice') }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { redirect_to posts_path, alert: @comment.errors.full_messages.to_sentence }
+        format.html { redirect_to posts_path, alert: ::Util.to_sentence(@comment) }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -20,12 +20,7 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    @comment.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to comments_path, status: :see_other, notice: I18n.t('comments.destroy.notice') }
-      format.json { head :no_content }
-    end
+    super(@comment, posts_path) # Calls the destroy method from ApplicationController
   end
 
   private

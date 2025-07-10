@@ -18,21 +18,12 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    @user.update(user_params)
-    respond_to do |format|
-      format.html { redirect_to @user, notice: I18n.t('users.update.notice') }
-      format.json { render :show, status: :ok, location: @user }
-    end
+    super(@user, user_params) # Calls the update method from ApplicationController
   end
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    @user.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to users_path, status: :see_other, notice: I18n.t('users.destroy.notice') }
-      format.json { head :no_content }
-    end
+    super(@user, users_path) # Calls the destroy method from ApplicationController
   end
 
   private

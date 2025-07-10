@@ -23,7 +23,7 @@
           <%= render document %>
           <%- if current_user.admin? %>
             <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-              <%= button_to 'Delete', document, method: :delete, class: 'w-full sm:w-auto rounded-md px-2 py-1 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer', form: { data: { turbo_confirm: 'Are you sure?' } } %>
+              <%= button_to 'Delete', document, method: :delete, class: 'w-full sm:w-auto rounded-md px-2 py-1 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer', data: { turbo_confirm: 'Are you sure?' } %>
             </div>
           <% end %>
         </div>

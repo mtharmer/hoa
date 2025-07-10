@@ -30,3 +30,6 @@ RSpecRails/InferredSpecType:
 
 Metrics/AbcSize:
   Max: 20
+
+Layout/LineLength:
+  Max: 140
