@@ -98,8 +98,8 @@ Rails.application.configure do
   config.x.mail_from = ENV['HOA_MAIL_FROM']
   config.action_mailer.delivery_method = :ses
   config.action_mailer.ses_settings = {
-    access_key_id:     ENV['AWS_ACCESS_KEY_ID'],
-    secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+    access_key_id:      Rails.application.credentials.dig(:mail, :access_key_id),
+    secret_access_key:  Rails.application.credentials.dig(:mail, :secret_access_key),
     region:            'us-east-1'
   }
   config.action_mailer.raise_delivery_errors = true

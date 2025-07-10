@@ -8,16 +8,11 @@ services:
     hostname: hoa
     restart: unless-stopped
     environment:
-      - RAILS_ENV
+      - RAILS_ENV=production
       - HOA_DATABASE_URL
       - RAILS_MASTER_KEY
-      - AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY
       - HOA_FQDN
       - HOA_MAIL_FROM
-      - AWS_S3_ACCESS_KEY
-      - AWS_S3_SECRET_KEY
-      - AWS_S3_BUCKET
     ports:
       - 3000:3000
     network_mode: host
