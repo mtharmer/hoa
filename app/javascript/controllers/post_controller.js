@@ -16,4 +16,18 @@ export default class extends Controller {
       commentForm.classList.add('hidden'); // Simulate a click on the button
     }
   }
+
+  expand() {
+    const postId = this.element.id.split('-')[3]; // Extracting post ID from
+    const commentList = document.getElementById(`comment-list-${postId}`);
+    const expandButton = document.getElementById(`post-expand-button-${postId}`);
+    const expandText = expandButton.querySelector('.expand-text');
+    const collapseText = expandButton.querySelector('.collapse-text');
+
+    if (commentList && expandText && collapseText) {
+      commentList.classList.toggle('hidden'); // Toggle visibility of the comment list
+      expandText.classList.toggle('hidden'); // Toggle visibility of the expand text
+      collapseText.classList.toggle('hidden'); // Toggle visibility of the collapse text
+    }
+  }
 }
