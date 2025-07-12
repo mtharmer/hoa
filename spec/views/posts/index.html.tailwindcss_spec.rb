@@ -7,6 +7,7 @@ RSpec.describe 'posts/index', type: :view do
 
   describe 'without posts' do
     before do
+      sign_in user
       assign(:posts, [])
     end
 
