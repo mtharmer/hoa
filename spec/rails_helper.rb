@@ -8,6 +8,9 @@ SimpleCov.start 'rails' do
   add_group 'Views', 'app/views'
 end
 
+require 'capybara/rspec'
+Capybara.default_driver = :selenium_chrome_headless
+
 require 'faker'
 
 require 'spec_helper'
@@ -84,6 +87,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
 end
 
 Shoulda::Matchers.configure do |config|

@@ -53,16 +53,19 @@ group :development, :test do
   gem 'brakeman', '~> 7.0'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'bundle-audit', '~> 0.1.0'
+  gem 'capybara', '~> 3.40'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails', '~> 6.5'
   gem 'reek', '~> 6.5'
   gem 'rspec-rails', '~> 7.1'
+  gem 'rubocop-capybara', '~> 2.22'
   gem 'rubocop-erb', '~> 0.6.0'
   gem 'rubocop-factory_bot', '~> 2.27'
   gem 'rubocop-rails', '~> 2.32'
   gem 'rubocop-rake', '~> 0.7.1'
   gem 'rubocop-rspec', '~> 3.6'
   gem 'rubocop-rspec_rails', '~> 2.31'
+  gem 'selenium-webdriver', '~> 4.34'
 end
 
 group :development do
