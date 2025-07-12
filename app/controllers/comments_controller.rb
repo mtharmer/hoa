@@ -20,6 +20,10 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+    if @comment.user != current_user
+      flash[:alert] = I18n.t('comments.destroy.alert')
+      redirect_to posts_path and return
+    end
     super(@comment, posts_path) # Calls the destroy method from ApplicationController
   end
 

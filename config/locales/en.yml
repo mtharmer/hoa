@@ -55,6 +55,7 @@ en:
       notice: 'Comment was successfully created.'
     destroy:
       notice: 'Comment was successfully destroyed.'
+      alert: 'You can only delete your own comments.'
   documents:
     download:
       alert: 'Document not found or file not attached.'
