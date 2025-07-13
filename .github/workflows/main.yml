@@ -35,7 +35,14 @@ jobs:
           RAILS_ENV: test
           HOA_DATABASE_TEST_URL: postgres://postgres:postgres@localhost:5432/hoa_test
         run: |
-          sudo apt-get -y install libpq-dev
+          sudo apt-get -y install libpq-dev google-chrome-stable
           bundle exec rails db:setup
           bundle exec rake assets:precompile
           bundle exec rspec
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/capybara
+          if-no-files-found: ignore
