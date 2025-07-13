@@ -63,3 +63,7 @@ en:
       notice: 'Document was successfully created.'
     destroy:
       notice: 'Document was successfully destroyed.'
+  registrations:
+    update:
+      notice: 'Your account has been updated successfully.'
+      alert: 'There was an error updating your account. Please try again.'

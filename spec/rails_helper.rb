@@ -14,6 +14,8 @@ Capybara.default_driver = :selenium_chrome_headless
 
 require 'faker'
 
+require 'database_cleaner/active_record'
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -51,6 +53,19 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end
+
+  # Clean the database before running each test suite
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each, :suite) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_paths = [
   #   Rails.root.join('spec/fixtures')
