@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :admin do
       admin { true }
     end
+
+    trait :unlocked do
+      locked { false }
+    end
   end
 end
