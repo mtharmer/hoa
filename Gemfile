@@ -65,6 +65,7 @@ group :development, :test do
   gem 'rubocop-rake', '~> 0.7.1'
   gem 'rubocop-rspec', '~> 3.6'
   gem 'rubocop-rspec_rails', '~> 2.31'
+  gem 'rubycritic', '~> 4.9'
   gem 'selenium-webdriver', '~> 4.34'
 end
 
@@ -80,6 +81,7 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner-active_record', '~> 2.2'
   gem 'faker', '~> 3.5'
   gem 'shoulda-matchers', '~> 6.5'
   gem 'simplecov', '~> 0.22.0'
@@ -91,5 +93,3 @@ gem 'aws-sdk-s3', '~> 1.192'
 gem 'devise', '~> 4.9'
 gem 'image_processing', '~> 1.14'
 gem 'rack-attack', '~> 6.7'
-
-gem 'rubycritic', '~> 4.9'
