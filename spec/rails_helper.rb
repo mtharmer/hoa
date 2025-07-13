@@ -8,6 +8,9 @@ SimpleCov.start 'rails' do
   add_group 'Views', 'app/views'
 end
 
+require 'capybara/rspec'
+Capybara.default_driver = :selenium_chrome_headless
+
 require 'faker'
 
 require 'spec_helper'
@@ -44,6 +47,9 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.before(:each, type: :system) do
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_paths = [
   #   Rails.root.join('spec/fixtures')
@@ -84,6 +90,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
 end
 
 Shoulda::Matchers.configure do |config|
