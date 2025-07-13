@@ -5,6 +5,7 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
   enable_coverage_for_eval
+  track_files 'app/views/**/*.erb'
   add_group 'Views', 'app/views'
 end
 
