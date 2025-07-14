@@ -10,7 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
     if resource_updated
       redirect_to root_path, notice: I18n.t('registrations.update_profile.notice')
     else
-      respond_with resource, location: edit_user_registration_path, alert: I18n.t('registrations.update_profile.alert')
+      flash[:alert] = I18n.t('registrations.update_profile.alert')
+      respond_with resource, location: edit_user_registration_path
     end
   end
 
