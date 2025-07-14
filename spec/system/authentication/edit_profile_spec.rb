@@ -10,7 +10,7 @@ RSpec.describe 'the signin process', type: :system do
   before do
     new_address
     sign_in user
-    visit edit_user_registration_path
+    visit edit_profile_path
   end
 
   it 'allows me to edit my profile' do

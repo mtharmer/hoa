@@ -12,12 +12,20 @@ RSpec.describe 'the main page', type: :system do
   end
 
   describe 'when not signed in' do
-    it 'has a link to sign up' do
-      expect(page).to have_link('Sign Up', href: new_user_registration_path)
-    end
+    describe 'account section' do
+      it 'has an Account button' do
+        expect(page).to have_css('button[data-nav-target="accountButton"]')
+      end
 
-    it 'has a link to sign in' do
-      expect(page).to have_link('Login', href: new_user_session_path)
+      it 'has a link to sign up' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_link('Sign Up', href: new_user_registration_path)
+      end
+
+      it 'has a link to sign in' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_link('Login', href: new_user_session_path)
+      end
     end
 
     it 'has a link to the home page' do
@@ -42,12 +50,25 @@ RSpec.describe 'the main page', type: :system do
       expect(page).to have_link('Dashboard', href: posts_path)
     end
 
-    it 'has a link to edit the user profile' do
-      expect(page).to have_link('Edit Profile', href: edit_user_registration_path)
-    end
+    describe 'account section' do
+      it 'has an Account button' do
+        expect(page).to have_css('button[data-nav-target="accountButton"]')
+      end
 
-    it 'has a link to sign out' do
-      expect(page).to have_button('Logout')
+      it 'has a link to the change password page' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_link('Change Password', href: edit_user_registration_path)
+      end
+
+      it 'has a link to edit the user profile' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_link('Edit Profile', href: edit_profile_path)
+      end
+
+      it 'has a link to sign out' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_button('Logout')
+      end
     end
   end
 
@@ -68,24 +89,46 @@ RSpec.describe 'the main page', type: :system do
       expect(page).to have_link('Dashboard', href: posts_path)
     end
 
-    it 'has a link to edit the user profile' do
-      expect(page).to have_link('Edit Profile', href: edit_user_registration_path)
+    describe 'account section' do
+      it 'has an Account button' do
+        expect(page).to have_css('button[data-nav-target="accountButton"]')
+      end
+
+      it 'has a link to the change password page' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_link('Change Password', href: edit_user_registration_path)
+      end
+
+      it 'has a link to edit the user profile' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_link('Edit Profile', href: edit_profile_path)
+      end
+
+      it 'has a link to sign out' do
+        find('button[data-nav-target="accountButton"]').click
+        expect(page).to have_button('Logout')
+      end
     end
 
-    it 'has a link to sign out' do
-      expect(page).to have_button('Logout')
-    end
+    describe 'admin section' do
+      it 'has an Admin button' do
+        expect(page).to have_css('button[data-nav-target="adminButton"]')
+      end
 
-    it 'has a link to the documents page' do
-      expect(page).to have_link('Documents', href: documents_path)
-    end
+      it 'has a link to the documents page' do
+        find('button[data-nav-target="adminButton"]').click
+        expect(page).to have_link('Documents', href: documents_path)
+      end
 
-    it 'has a link to the addresses page' do
-      expect(page).to have_link('Addresses', href: addresses_path)
-    end
+      it 'has a link to the addresses page' do
+        find('button[data-nav-target="adminButton"]').click
+        expect(page).to have_link('Addresses', href: addresses_path)
+      end
 
-    it 'has a link to manage users' do
-      expect(page).to have_link('Users', href: users_path)
+      it 'has a link to manage users' do
+        find('button[data-nav-target="adminButton"]').click
+        expect(page).to have_link('Users', href: users_path)
+      end
     end
   end
 end

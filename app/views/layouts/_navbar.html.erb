@@ -20,30 +20,43 @@
         </li>
       <% end %>
       <%- if current_user&.admin? %>
-        <li>
-          <a href="/addresses" class="text-slate-800 hover:text-slate-600">Addresses</a>
-        </li>
-        <li>
-          <a href="/users" class="text-slate-800 hover:text-slate-600">Users</a>
-        </li>
+        <div data-controller='nav'>
+          <button data-action='click->nav#toggleAdmin click@window->nav#hideAdmin' data-nav-target='adminButton' class='cursor-pointer text-slate-800 hover:text-slate-600'>Admin</button>
+          <ul data-nav-target='adminSection' class="hidden absolute bg-white border rounded-sm border-slate-400 space-y-2 p-2">
+            <li>
+              <a href="/addresses" class="text-slate-800 hover:text-slate-600">Addresses</a>
+            </li>
+            <li>
+              <a href="/users" class="text-slate-800 hover:text-slate-600">Users</a>
+            </li>
+          </ul>
+        </div>
       <% end %>
     </ul>
-    <ul class="flex space-x-4 pr-4">
-      <%- if !current_user %>
-        <li>
-          <a href="/auth/sign_in" class="text-slate-800 hover:text-slate-600">Login</a>
-        </li>
-        <li>
-          <a href="/auth/sign_up" class="text-slate-800 hover:text-slate-600">Sign Up</a>
-        </li>
-      <% else %>
-        <li>
-          <a href="/auth/edit" class="text-slate-800 hover:text-slate-600">Edit Profile</a>
-        </li>
-        <li>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button cursor-pointer' %>
-        </li>
-      <% end %>
+    <ul class="flex">
+      <div data-controller='nav' class="text-left pr-24">
+        <button data-action='click->nav#toggleAccount click@window->nav#hideAccount' data-nav-target='accountButton' class='cursor-pointer text-slate-800 hover:text-slate-600'>Account</button>
+        <ul data-nav-target='accountSection' class="hidden absolute bg-white border rounded-sm border-slate-400 space-y-2 p-2">
+          <% if !current_user %>
+            <li>
+              <a href="/auth/sign_in" class="text-slate-800 hover:text-slate-600">Login</a>
+            </li>
+            <li>
+              <a href="/auth/sign_up" class="text-slate-800 hover:text-slate-600">Sign Up</a>
+            </li>
+          <% else %>
+            <li>
+              <a href="/auth/edit" class="text-slate-800 hover:text-slate-600">Change Password</a>
+            </li>
+            <li>
+              <a href="/auth/profile" class="text-slate-800 hover:text-slate-600">Edit Profile</a>
+            </li>
+            <li>
+              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button cursor-pointer' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </ul>
   </div>
 </nav>

@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 class RegistrationsController < Devise::RegistrationsController
-  def update
-    resource_updated = current_user.update(account_update_params)
+  def profile
+    render 'devise/registrations/profile', locals: { resource: current_user }
+  end
+
+  def update_profile
+    resource_updated = current_user.update(profile_update_params)
     if resource_updated
-      redirect_to root_path, notice: I18n.t('registrations.update.notice')
+      redirect_to root_path, notice: I18n.t('registrations.update_profile.notice')
     else
-      respond_with resource, location: edit_user_registration_path, alert: I18n.t('registrations.update.alert')
+      flash[:alert] = I18n.t('registrations.update_profile.alert')
+      respond_with resource, location: edit_user_registration_path
     end
   end
 
@@ -22,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
     true
   end
 
-  def account_update_params
+  def profile_update_params
     params.require(:user).permit(:email, :name, :address_id)
   end
 end

@@ -1,0 +1,38 @@
+<div class='flex justify-center items-center'>
+  <div class='flex flex-col justify-center'>
+    <div class='flex flex-row mb-8'>
+      <h2 class='font-bold text-2xl'>Edit Profile</h2>
+    </div>
+
+    <div class='flex flex-row ml-4'>
+      <div class='flex flex-col shadow shadow-slate-400 p-4'>
+        <%= form_for(resource, url: profile_path(current_user), html: { method: :put }) do |f| %>
+          <%= render 'devise/shared/error_messages', resource: resource %>
+
+          <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, value: resource.name, autofocus: true, autocomplete: 'name', class: 'border rounded-sm bg-slate-100 min-w-52' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'border rounded-sm bg-slate-100 min-w-52' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :address_id, 'Address' %><br />
+            <%= f.collection_select :address_id, Address.all, :id, :address, { prompt: 'Select an address' }, class: 'border rounded-sm bg-slate-100' %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit 'Update', class: 'button cursor-pointer text-white bg-blue-700 rounded-md px-4 py-1 mt-4 mb-8 cursor-pointer' %>
+          </div>
+        <% end %>
+
+        <div>Unhappy? <%= button_to 'Cancel my account', registration_path(current_user), data: { confirm: 'Are you sure?', turbo_confirm: 'Are you sure?' }, method: :delete, class: 'button cursor-pointer underline' %></div>
+
+        <%= link_to 'Back', :back, class: 'underline' %>
+      </div>
+    </div>
+  </div>
+</div>
