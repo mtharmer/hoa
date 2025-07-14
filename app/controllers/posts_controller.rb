@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.includes(:comments).order(created_at: :desc)
+    @pagy, @posts = pagy(Post.includes(:comments).order(id: :desc))
   end
 
   # GET /posts/new

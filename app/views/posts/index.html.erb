@@ -8,11 +8,8 @@
 
   <div id="posts" class="w-full divide-y divide-gray-200 space-y-5 flex flex-col justify-center items-center">
     <% if @posts.any? %>
-      <% @posts.each do |post| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0 shadow w-xl">
-          <%= render post %>
-        </div>
-      <% end %>
+      <%= render partial: 'post', collection: @posts %>
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
     <% else %>
       <p class="text-center my-10">No posts found.</p>
     <% end %>
