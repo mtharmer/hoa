@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     registrations: 'registrations',
     sessions: 'sessions'
   }
+  devise_scope :user do
+    get 'auth/profile', to: 'registrations#profile', as: :edit_profile
+    put 'auth/update_profile', to: 'registrations#update_profile', as: :profile
+  end
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
