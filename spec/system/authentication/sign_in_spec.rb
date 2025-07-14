@@ -41,4 +41,14 @@ RSpec.describe 'the signin process', type: :system do
       expect(page).to have_content 'Invalid Email or password'
     end
   end
+
+  it 'has a link to sign up' do
+    visit new_user_session_path
+    expect(page).to have_link 'Sign up', href: new_user_registration_path
+  end
+
+  it 'has a link to reset password' do
+    visit new_user_session_path
+    expect(page).to have_link 'Forgot your password?', href: new_user_password_path
+  end
 end
