@@ -14,7 +14,7 @@ RSpec.describe 'the main page', type: :system do
   describe 'when not signed in' do
     describe 'account section' do
       it 'has an Account button' do
-        expect(page).to have_selector('button[data-nav-target="accountButton"]')
+        expect(page).to have_css('button[data-nav-target="accountButton"]')
       end
 
       it 'has a link to sign up' do
@@ -52,7 +52,7 @@ RSpec.describe 'the main page', type: :system do
 
     describe 'account section' do
       it 'has an Account button' do
-        expect(page).to have_selector('button[data-nav-target="accountButton"]')
+        expect(page).to have_css('button[data-nav-target="accountButton"]')
       end
 
       it 'has a link to the change password page' do
@@ -91,7 +91,7 @@ RSpec.describe 'the main page', type: :system do
 
     describe 'account section' do
       it 'has an Account button' do
-        expect(page).to have_selector('button[data-nav-target="accountButton"]')
+        expect(page).to have_css('button[data-nav-target="accountButton"]')
       end
 
       it 'has a link to the change password page' do
@@ -112,7 +112,7 @@ RSpec.describe 'the main page', type: :system do
 
     describe 'admin section' do
       it 'has an Admin button' do
-        expect(page).to have_selector('button[data-nav-target="adminButton"]')
+        expect(page).to have_css('button[data-nav-target="adminButton"]')
       end
 
       it 'has a link to the documents page' do
