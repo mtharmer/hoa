@@ -9,7 +9,9 @@
   <div id="posts" class="w-full divide-y divide-gray-200 space-y-5 flex flex-col justify-center items-center">
     <% if @posts.any? %>
       <%= render partial: 'post', collection: @posts %>
-      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+      <div id='post-pagy-nav'>
+        <%== pagy_nav(@pagy) if @pagy&.pages && @pagy.pages > 1 %>
+      </div>
     <% else %>
       <p class="text-center my-10">No posts found.</p>
     <% end %>
