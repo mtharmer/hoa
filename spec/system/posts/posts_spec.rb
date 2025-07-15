@@ -146,13 +146,13 @@ RSpec.describe 'the posts page', type: :system do
 
     it 'shows paginated posts' do
       visit posts_path
-      expect(page).to have_selector('#post-pagy-nav')
+      expect(page).to have_css('#post-pagy-nav')
       expect(page).to have_link '2'
     end
 
     it 'navigates to the next page' do
       visit posts_path
-      page.scroll_to(find('#post-pagy-nav'))
+      page.scroll_to(find_by_id('post-pagy-nav'))
       within '#post-pagy-nav' do
         expect(page).to have_link('>')
         click_link '>'
@@ -162,7 +162,7 @@ RSpec.describe 'the posts page', type: :system do
 
     it 'navigates to the previous page' do
       visit posts_path(page: 2)
-      page.scroll_to(find('#post-pagy-nav'))
+      page.scroll_to(find_by_id('post-pagy-nav'))
       within '#post-pagy-nav' do
         expect(page).to have_link('<')
         click_link '<'
