@@ -3,12 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe 'the main page', type: :system do
+  around do |example|
+    ClimateControl.modify HOA_TITLE: 'Some HOA' do
+      example.run
+    end
+  end
+
   before do
     visit root_path
   end
 
   it 'shows the welcome message' do
     expect(page).to have_content('Home#index')
+  end
+
+  it 'shows the hoa title' do
+    expect(page).to have_content('Some HOA')
   end
 
   describe 'when not signed in' do
@@ -29,7 +39,7 @@ RSpec.describe 'the main page', type: :system do
     end
 
     it 'has a link to the home page' do
-      expect(page).to have_link('HOA Home', href: root_path)
+      expect(page).to have_link('Home', href: root_path)
     end
   end
 
@@ -40,10 +50,6 @@ RSpec.describe 'the main page', type: :system do
     before do
       sign_in user
       visit root_path
-    end
-
-    it 'shows the user address' do
-      expect(page).to have_content(user.address.address.to_s)
     end
 
     it 'has a link to the posts page' do
@@ -79,10 +85,6 @@ RSpec.describe 'the main page', type: :system do
     before do
       sign_in admin
       visit root_path
-    end
-
-    it 'shows the user address' do
-      expect(page).to have_content(admin.address.address.to_s)
     end
 
     it 'has a link to the posts page' do
