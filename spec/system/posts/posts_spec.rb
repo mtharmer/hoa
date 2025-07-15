@@ -136,4 +136,38 @@ RSpec.describe 'the posts page', type: :system do
       end
     end
   end
+
+  describe 'pagination' do
+    before do
+      25.times do
+        create(:post, user: user, message: "Post #{rand(1000)}")
+      end
+    end
+
+    it 'shows paginated posts' do
+      visit posts_path
+      expect(page).to have_css('#post-pagy-nav')
+      expect(page).to have_link '2'
+    end
+
+    it 'navigates to the next page' do
+      visit posts_path
+      page.scroll_to(find_by_id('post-pagy-nav'))
+      within '#post-pagy-nav' do
+        expect(page).to have_link('>')
+        click_link '>'
+      end
+      expect(page).to have_link '<'
+    end
+
+    it 'navigates to the previous page' do
+      visit posts_path(page: 2)
+      page.scroll_to(find_by_id('post-pagy-nav'))
+      within '#post-pagy-nav' do
+        expect(page).to have_link('<')
+        click_link '<'
+      end
+      expect(page).to have_link '>'
+    end
+  end
 end
