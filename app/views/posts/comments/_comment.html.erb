@@ -4,7 +4,7 @@
     <p class="text-sm text-gray-500 mb-2"><%= comment.created_at.strftime('%B %d, %Y at %I:%M %p') %></p>
     <p class='whitespace-pre-wrap'><%= comment.message %></p>
     <% if current_user == comment.user %>
-      <%= button_to 'Delete', comment_path(comment), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'mt-2 text-red-600 hover:text-red-500 cursor-pointer border border-red-600 rounded-sm px-2 py-1' %>
+      <%= button_to 'Delete', comment_path(comment), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'mt-2 text-red-600 hover:text-red-500 cursor-pointer border border-red-600 rounded-sm px-1 py-0.5 text-xs' %>
     <% end %>
   </div>
 </div>
