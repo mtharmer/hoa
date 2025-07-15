@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe 'the posts page', type: :system do
   let(:user) { create(:user, locked: false) }
-  let(:other_user) { create(:user, locked: false) }
 
   before do
     sign_in user
@@ -18,8 +17,10 @@ RSpec.describe 'the posts page', type: :system do
   end
 
   describe 'when there are posts' do
-    let!(:first_post) { create(:post, message: 'First Post', user: user) }
-    let!(:other_post) { create(:post, message: 'Other Post', user: other_user) }
+    let!(:user_post) { create(:post, message: 'First Post', user: user) }
+    let!(:other_user_post) { create(:post, message: 'Other Post') }
+    let!(:user_comment) { create(:comment, post: user_post, user: user, message: 'First comment') }
+    let!(:other_user_comment) { create(:comment, post: user_post, message: 'Second comment') }
 
     it 'shows the posts' do
       visit posts_path
@@ -39,31 +40,36 @@ RSpec.describe 'the posts page', type: :system do
 
     it 'shows a comment button' do
       visit posts_path
-      within "#post_#{first_post.id}" do
+      within "#post_#{user_post.id}" do
         expect(page).to have_button 'Comment'
       end
     end
 
     it 'shows delete button' do
       visit posts_path
-      within "#post_#{first_post.id}" do
+      within "#post_#{user_post.id}" do
         expect(page).to have_button 'Delete'
       end
     end
 
-    it 'shows an expand button' do
+    it 'shows an expand button with comment count if the post has comments' do
       visit posts_path
-      within "#post_#{first_post.id}" do
-        expect(page).to have_button 'Expand'
+      within "#post_#{user_post.id}" do
+        expect(page).to have_button 'See 2 comments'
+      end
+    end
+
+    it 'does not show the expand button if the post has no comments' do
+      visit posts_path
+      within "#post_#{other_user_post.id}" do
+        expect(page).to have_no_selector('button', text: /See \d+ comment./)
       end
     end
 
     it 'shows comments for a post' do
-      first_post.comments.create!(message: 'First comment', user: user)
-      first_post.comments.create!(message: 'Second comment', user: user)
       visit posts_path
-      within "#post_#{first_post.id}" do
-        click_button 'Expand'
+      within "#post_#{user_post.id}" do
+        click_button 'See 2 comments'
         expect(page).to have_content('First comment')
         expect(page).to have_content('Second comment')
       end
@@ -72,7 +78,7 @@ RSpec.describe 'the posts page', type: :system do
     describe 'creating a comment' do
       before do
         visit posts_path
-        within "#post_#{first_post.id}" do
+        within "#post_#{user_post.id}" do
           click_button 'Comment'
           fill_in 'Message', with: 'This is a comment'
           click_button 'Create Comment'
@@ -82,36 +88,33 @@ RSpec.describe 'the posts page', type: :system do
       it 'allows creating a comment on a post' do
         expect(page).to have_content('Comment was successfully created.')
         visit posts_path
-        within "#post_#{first_post.id}" do
-          click_button 'Expand'
+        within "#post_#{user_post.id}" do
+          click_button 'See 3 comments'
           expect(page).to have_content('This is a comment')
         end
       end
     end
 
     describe 'deleting a comment' do
-      let!(:comment) { first_post.comments.create!(message: 'Comment to delete', user: user) }
-      let!(:other_comment) { first_post.comments.create!(message: 'Other comment', user: other_user) }
-
       before do
         visit posts_path
-        within "#post_#{first_post.id}" do
-          click_button 'Expand'
+        within "#post_#{user_post.id}" do
+          click_button 'See 2 comments'
         end
       end
 
       it 'allows deleting a comment' do
-        within "#comment_#{comment.id}" do
+        within "#comment_#{user_comment.id}" do
           accept_confirm do
             click_button 'Delete'
           end
         end
         expect(page).to have_content('Comment was successfully destroyed.')
-        expect(page).to have_no_content('Comment to delete')
+        expect(page).to have_no_content('First comment')
       end
 
       it 'does not allow deleting a comment by another user' do
-        within "#comment_#{other_comment.id}" do
+        within "#comment_#{other_user_comment.id}" do
           expect(page).to have_no_button('Delete')
         end
       end
@@ -120,7 +123,7 @@ RSpec.describe 'the posts page', type: :system do
     describe 'deleting a post' do
       it 'allows deleting a post' do
         visit posts_path
-        within "#post_#{first_post.id}" do
+        within "#post_#{user_post.id}" do
           accept_confirm do
             click_button 'Delete'
           end
@@ -130,7 +133,7 @@ RSpec.describe 'the posts page', type: :system do
 
       it 'does not allow deleting a post by another user' do
         visit posts_path
-        within "#post_#{other_post.id}" do
+        within "#post_#{other_user_post.id}" do
           expect(page).to have_no_button('Delete')
         end
       end
