@@ -81,6 +81,7 @@ group :development do
 end
 
 group :test do
+  gem 'climate_control', '~> 1.2'
   gem 'database_cleaner-active_record', '~> 2.2'
   gem 'faker', '~> 3.5'
   gem 'shoulda-matchers', '~> 6.5'
