@@ -21,6 +21,10 @@ RSpec.describe 'the posts page', type: :system do
     let!(:first_post) { create(:post, message: 'First Post', user: user) }
     let!(:other_post) { create(:post, message: 'Other Post', user: other_user) }
 
+    before do
+      create_list(:comment, 2, post: first_post, user: user)
+    end
+
     it 'shows the posts' do
       visit posts_path
       within '#posts-list' do
@@ -51,10 +55,31 @@ RSpec.describe 'the posts page', type: :system do
       end
     end
 
-    it 'shows an expand button' do
+    it 'shows an expand button if the post has comments' do
       visit posts_path
       within "#post_#{first_post.id}" do
         expect(page).to have_button 'Expand'
+      end
+    end
+
+    it 'shows a comment count if there are comments' do
+      visit posts_path
+      within "#post_#{first_post.id}" do
+        expect(page).to have_content('2 comments')
+      end
+    end
+
+    it 'does not show the expand button if the post has no comments' do
+      visit posts_path
+      within "#post_#{other_post.id}" do
+        expect(page).to have_no_button 'Expand'
+      end
+    end
+
+    it 'does not show a comment count if there are no comments' do
+      visit posts_path
+      within "#post_#{other_post.id}" do
+        expect(page).to have_no_content('comment')
       end
     end
 
